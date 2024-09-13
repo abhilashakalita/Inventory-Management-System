@@ -35,18 +35,13 @@ function deleteItem(inventory, id) {
     }
 }
 
-function getItem(inventory, id) {
-    const item = inventory.find(item => item.id === id);
-    if (item) {
-        return item;
-    } else {
-        console.log(`Item with ID ${id} not found.`);
-        return null;
-    }
-}
-
 function printInventory(inventory) {
     console.log(JSON.stringify(inventory, null, 2));
+}
+
+function getUserInput(message) {
+    const input = prompt(message);
+    return input;
 }
 
 let inventory = [
@@ -57,8 +52,17 @@ let inventory = [
 console.log("Initial Inventory:");
 printInventory(inventory);
 
-addItem(inventory, new Item(3, 'Orange', 15, 0.7));
+const newItemId = parseInt(getUserInput("Enter new item ID:"));
+const newItemName = getUserInput("Enter new item name:");
+const newItemQuantity = parseInt(getUserInput("Enter new item quantity:"));
+const newItemPrice = parseFloat(getUserInput("Enter new item price:"));
 
-updateItem(inventory, 2, { quantity: 30 });
+addItem(inventory, new Item(newItemId, newItemName, newItemQuantity, newItemPrice));
 
-deleteItem(inventory, 2);
+const updateItemId = parseInt(getUserInput("Enter the ID of the item to update:"));
+const newQuantity = parseInt(getUserInput("Enter new quantity for the item:"));
+
+updateItem(inventory, updateItemId, { quantity: newQuantity });
+
+const deleteItemId = parseInt(getUserInput("Enter the ID of the item to delete:"));
+deleteItem(inventory, deleteItemId);
