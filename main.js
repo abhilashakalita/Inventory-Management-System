@@ -9,14 +9,16 @@ class Item {
 
 function addItem(inventory, item) {
     inventory.push(item);
-    console.log("Item added successfully.");
+    console.log("Adding item:");
+    printInventory(inventory);
 }
 
 function updateItem(inventory, id, newDetails) {
     const item = inventory.find(item => item.id === id);
     if (item) {
         Object.assign(item, newDetails);
-        console.log(`Item with ID ${id} updated successfully.`);
+        console.log("Updating item:");
+        printInventory(inventory);
     } else {
         console.log(`Item with ID ${id} not found.`);
     }
@@ -26,7 +28,8 @@ function deleteItem(inventory, id) {
     const index = inventory.findIndex(item => item.id === id);
     if (index !== -1) {
         inventory.splice(index, 1);
-        console.log(`Item with ID ${id} deleted successfully.`);
+        console.log("Deleting item:");
+        printInventory(inventory);
     } else {
         console.log(`Item with ID ${id} not found.`);
     }
@@ -43,7 +46,6 @@ function getItem(inventory, id) {
 }
 
 function printInventory(inventory) {
-    console.log("Current Inventory:");
     console.log(JSON.stringify(inventory, null, 2));
 }
 
@@ -56,16 +58,7 @@ console.log("Initial Inventory:");
 printInventory(inventory);
 
 addItem(inventory, new Item(3, 'Orange', 15, 0.7));
-console.log("After adding item:");
-printInventory(inventory);
 
 updateItem(inventory, 2, { quantity: 30 });
-console.log("After updating item:");
-printInventory(inventory);
 
 deleteItem(inventory, 2);
-console.log("After deleting item:");
-printInventory(inventory);
-
-console.log("Get item with ID 1:");
-console.log(getItem(inventory, 1));
