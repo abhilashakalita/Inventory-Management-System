@@ -7,10 +7,10 @@ class Item {
     }
 }
 
-function addItem(inventory, item) {
+function addItem(inventory, name, quantity, price) {
+    const id = inventory.length + 1;  
+    const item = new Item(id, name, quantity, price);
     inventory.push(item);
-    console.log("Adding item:");
-    printInventory(inventory);
 }
 
 function updateItem(inventory, id, newDetails) {
@@ -40,24 +40,23 @@ function printInventory(inventory) {
 }
 
 function getUserInput(message) {
-    const input = prompt(message);
-    return input;
+    return prompt(message);
 }
 
-let inventory = [
-    new Item(1, 'Apple', 10, 0.5),
-    new Item(2, 'Banana', 20, 0.2)
-];
+let inventory = [];
+
+const initialItemCount = parseInt(getUserInput("How many items do you want to add initially?"));
+
+for (let i = 0; i < initialItemCount; i++) {
+    const newItemName = getUserInput(`Enter item name for item ${i + 1}:`);
+    const newItemQuantity = parseInt(getUserInput(`Enter item quantity for item ${i + 1}:`));
+    const newItemPrice = parseFloat(getUserInput(`Enter item price for item ${i + 1}:`));
+
+    addItem(inventory, newItemName, newItemQuantity, newItemPrice);
+}
 
 console.log("Initial Inventory:");
 printInventory(inventory);
-
-const newItemId = parseInt(getUserInput("Enter new item ID:"));
-const newItemName = getUserInput("Enter new item name:");
-const newItemQuantity = parseInt(getUserInput("Enter new item quantity:"));
-const newItemPrice = parseFloat(getUserInput("Enter new item price:"));
-
-addItem(inventory, new Item(newItemId, newItemName, newItemQuantity, newItemPrice));
 
 const updateItemId = parseInt(getUserInput("Enter the ID of the item to update:"));
 const newQuantity = parseInt(getUserInput("Enter new quantity for the item:"));
