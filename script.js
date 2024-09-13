@@ -1,4 +1,3 @@
-Item class
 class Item {
     constructor(id, name, quantity, price) {
         this.id = id;
